@@ -1,15 +1,14 @@
 <?php
-    $directory = "../copi4jpg";
-    $posterDirectory = '../posters/';
+//    $directory = "../copi4jpg";
+    $directory = "../posters_casse";
+    $posterDirectory = '../posters_repare/';
     $list = scandir($directory);
-    if ($list) {
-        $response = array();
-        foreach ($list as $image) {
-            if ($image != "." && $image != ".." && $image != "posters") {
-                $gdImage = imagecreatefromjpeg("copi4jpg/" . $image);
-                $smallGdImage = imagecrop($gdImage, ['x' => 467, 'y' => 285, 'width' => 316, 'height' => 433]);
-                imagejpeg($smallGdImage, $posterDirectory . $image);
-            }
+
+    foreach ($list as $image) {
+        if ($image != "." && $image != ".." && $image != "posters") {
+            $gdImage = imagecreatefromjpeg("../copi4jpg/" . substr($image, 0, 1) . "/" . $image);
+            $smallGdImage = imagecrop($gdImage, ['x' => 465, 'y' => 286, 'width' => 316, 'height' => 433]);
+            imagejpeg($smallGdImage, $posterDirectory . $image);
         }
     }
 ?>
