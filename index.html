@@ -1,15 +1,61 @@
 <html>
 	<head>
-	
+		<link rel="stylesheet" href="css/materialize.css">
+		<link rel="stylesheet" href="css/marcotv.css">
+		<script src="js/jquery-3.7.1.min.js"></script>
+		<script src="js/materialize.js"></script>
 	
 	</head>
 
 	<body>
-	
-	
-	
-	
-	
-	</body>
+		<nav class="light-blue lighten-1" role="navigation">
+			<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+				<ul class="right hide-on-med-and-down">
+					<li><a href="#">Navbar Link</a></li>
+				</ul>
 
+				<ul id="nav-mobile" class="sidenav">
+					<li><a href="#">Navbar Link</a></li>
+				</ul>
+				<a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+			</div>
+		</nav>
+
+		<div class="container">
+			<div class="row" id="image-liste">
+				<!-- Auto filled with javascript -->
+			</div>
+		</div>
+		
+	</body>
+	
+	<script>
+	$(document).ready(function () {
+		$.ajax({
+			url: "https://www.haderer.fr/marcosite/services/all_movies.php?a=a",
+			type: "GET",
+			success: function(result){
+				var resultat = JSON.parse(result);
+					if (resultat.code == "0") {
+					console.log(result);
+					
+					var imageList = "";
+					resultat.content.forEach(function (film) {
+						imageList += "<div class=\"col s6 m2 image-container\">";
+						imageList += "    <img src=\"" + film.poster + "\" width=\"100%\">";
+						imageList += "</div>";
+					});
+					
+				$("#image-liste").html(imageList);
+				} else {
+					console.log("erreur: " + resultat.message);
+				}
+			},
+			error: function(xhr,status,error){
+				console.log("erreur !!!");
+			}
+		});
+	});
+	</script>
+	
 </html>

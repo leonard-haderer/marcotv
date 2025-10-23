@@ -1,8 +1,9 @@
 <?php
+    header('Access-Control-Allow-Origin: *');
     $directory = "../copi4jpg";
     $posterDirectory = 'posters/';
-    $list = scandir($directory);
-    if ($list) {
+	if (is_dir($directory)) {
+		$list = scandir($directory);
         $response = array();
         $response["code"] = 0;
         $response["message"] = "OK";
