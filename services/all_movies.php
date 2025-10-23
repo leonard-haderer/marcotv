@@ -11,6 +11,7 @@
         foreach ($list as $movie) {
             if ($movie != "." && $movie != ".." && $movie != "posters") {
                 $element = array();
+                $element["id"] = explode(".", $movie)[0];
                 $element["title"] = str_replace("_", " ", explode(".", $movie)[0]);
                 $element["poster"] = $posterDirectory . $movie;
                 array_push($response["content"], $element);
