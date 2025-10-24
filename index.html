@@ -32,7 +32,7 @@
 	<script>
 	$(document).ready(function () {
 		$.ajax({
-			url: "https://www.haderer.fr/marcosite/services/all_movies.php?a=a",
+			url: "services/all_movies.php",
 			type: "GET",
 			success: function(result){
 				var resultat = JSON.parse(result);

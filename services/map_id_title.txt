@@ -144,7 +144,6 @@ battleShip battleship /416173
 beautravail beau_travail /423991
 belBeteDA la_belle_et_la_bete /378925
 belClocharAppelRu la_belle_et_le_clochard_2_l_appel_de_la_rue /450301
-bellBete46 la_belle_et_la_bete /483158
 belldejour belle_de_jour /446340
 BenGatesLivrSecret benjamin_gates_et_le_livre_des_secrets /466378
 bengateTresorTemplier benjamin_gates_et_le_tresor_des_templiers /461871
@@ -939,7 +938,7 @@ secretDerrierePorte le_secret_derriere_la_porte /365116
 secretMensong secrets_et_mensonges /373225
 seigneurAnneauRetourRoi le_seigneur_des_anneaux_le_retour_du_roi /481351
 seigneurAno2Tour le_seigneur_des_anneaux_les_deux_tours /471803
-seigneurAnoCommuno TODO /471803
+seigneurAnoCommuno le_seigneur_des_anneaux_la_communaute_de_l_anneau /471803
 sentierGloir les_sentiers_de_la_gloire /415777
 separation une_separation /383141
 serialNoceur- serial_noceurs /372811
@@ -1095,7 +1094,6 @@ twiligh3Hesit twilight_chapitre_3_hesitation /380081
 twilight1 twilight_chapitre_1_fascination /470705
 twilight5Revelation twilight_chapitre_5_revelation /452370
 twilit4Revel twilight_chapitre_4_revelation_1ere_partie /384222
-twilitChap5Revel2 twilight_chapitre_5_revelation_2e_partie /452370
 twister twister /471634
 usualsuspect usual_suspects /390881
 vacansMrHulot les_vacances_de_monsieur_hulot /477726
