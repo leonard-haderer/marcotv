@@ -8,6 +8,23 @@
 	</head>
 
 	<body>
+
+  <!-- Modal Structure -->
+  <div class="modal" id="choix-film-modal">
+    <div class="modal-content">
+      <h4>Vous avez choisi <span id="film-title"></span></h4>
+	  <h5>Identifiez-vous</h5>
+	  <button id="Pierre">Pierre</button>
+	  <button id="Bernadette">Bernadette</button>
+	  <p id="message-confirmation"></p>
+    </div>
+    <div class="modal-footer">
+	  <input type="hidden" id="film-id"></input>
+	  <input type="hidden" id="film-card"></input>
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Fermer</a>
+    </div>
+  </div>
+  
 		<nav class="light-blue lighten-1" role="navigation">
 			<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
 				<ul class="right hide-on-med-and-down">
@@ -32,30 +49,72 @@
 	<script>
 	$(document).ready(function () {
 		$.ajax({
-			url: "services/all_movies.php",
+			url: "https://haderer.fr/marcotest/services/all_movies.php",
 			type: "GET",
 			success: function(result){
 				var resultat = JSON.parse(result);
-					if (resultat.code == "0") {
+				if (resultat.code == "0") {
 					console.log(result);
-					
+
 					var imageList = "";
 					resultat.content.forEach(function (film) {
-						imageList += "<div class=\"col s6 m2 image-container\">";
+						imageList += "<div class=\"col s6 m2 image-container\" data-id='" + film.id + "' data-card='" + film.card + "' data-title='" + film.title + "'>";
 						imageList += "    <img src=\"" + film.poster + "\" width=\"100%\">";
 						imageList += "</div>";
 					});
 					
-				$("#image-liste").html(imageList);
+					$("#image-liste").html(imageList);
 				} else {
 					console.log("erreur: " + resultat.message);
 				}
 			},
 			error: function(xhr,status,error){
 				console.log("erreur !!!");
+			},
+			complete: function() {	
+				$(".image-container").click(function() {
+					var id = $(this).attr("data-id");
+					$("#film-id").attr("value", id);
+					var card = $(this).attr("data-card");
+					$("#film-card").attr("value", card);
+					var title = $(this).attr("data-title");
+					$("#film-title").html(title);
+					console.log("Click !!! " + id);
+					$("#message-confirmation").html("");
+					$('#choix-film-modal').modal('open');
+				});
 			}
 		});
 	});
+	
+	$(document).ready(function(){
+		$('.modal').modal();
+
+		$("#Pierre").click(function() {
+			var id = $("#film-id").attr("value");
+			var card = $("#film-card").attr("value");
+			console.log("Click !!! --- " + id);
+			$.ajax({
+				url: "https://haderer.fr/marcotest/services/choose_movie.php?user=Pierre&movie=" + id,
+				type: "GET",
+				success: function(result){
+					var resultat = JSON.parse(result);
+					var message = "";
+					if (resultat.code == "0") {
+						console.log(result);
+						var message = "Votre choix a été enregistré. Vous pouvez à présent mettre la carte " + card + " pour visionner votre film.";
+					} else {
+						console.log(result);
+						var message = "Une erreur est survenue." + resultat.message;
+					}
+					$("#message-confirmation").html(message);
+				}
+			});
+		});
+
+	});
+	
+	
 	</script>
 	
 </html>

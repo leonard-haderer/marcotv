@@ -2,3 +2,8 @@
 	padding-top: 0.75rem !important;
 	padding-bottom: 0.75rem !important;
 }
+
+#film-title {
+	font-style: italic;
+	color: #1C48A3;
+}
