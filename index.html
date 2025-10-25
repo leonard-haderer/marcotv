@@ -47,55 +47,14 @@
 	</body>
 	
 	<script>
-	$(document).ready(function () {
-		$.ajax({
-			url: "https://haderer.fr/marcotest/services/all_movies.php",
-			type: "GET",
-			success: function(result){
-				var resultat = JSON.parse(result);
-				if (resultat.code == "0") {
-					console.log(result);
-
-					var imageList = "";
-					resultat.content.forEach(function (film) {
-						imageList += "<div class=\"col s6 m2 image-container\" data-id='" + film.id + "' data-card='" + film.card + "' data-title='" + film.title + "'>";
-						imageList += "    <img src=\"" + film.poster + "\" width=\"100%\">";
-						imageList += "</div>";
-					});
-					
-					$("#image-liste").html(imageList);
-				} else {
-					console.log("erreur: " + resultat.message);
-				}
-			},
-			error: function(xhr,status,error){
-				console.log("erreur !!!");
-			},
-			complete: function() {	
-				$(".image-container").click(function() {
-					var id = $(this).attr("data-id");
-					$("#film-id").attr("value", id);
-					var card = $(this).attr("data-card");
-					$("#film-card").attr("value", card);
-					var title = $(this).attr("data-title");
-					$("#film-title").html(title);
-					console.log("Click !!! " + id);
-					$("#message-confirmation").html("");
-					$('#choix-film-modal').modal('open');
-				});
-			}
-		});
-	});
 	
-	$(document).ready(function(){
+    function activateModal() {
 		$('.modal').modal();
-
 		$("#Pierre").click(function() {
 			var id = $("#film-id").attr("value");
 			var card = $("#film-card").attr("value");
-			console.log("Click !!! --- " + id);
 			$.ajax({
-				url: "https://haderer.fr/marcotest/services/choose_movie.php?user=Pierre&movie=" + id,
+				url: "services/choose_movie.php?user=Pierre&movie=" + id,
 				type: "GET",
 				success: function(result){
 					var resultat = JSON.parse(result);
@@ -110,9 +69,78 @@
 					$("#message-confirmation").html(message);
 				}
 			});
-		});
+		});    
+    }
 
+	function activateClickFilm() {
+		$(".image-container").click(function() {
+			var id = $(this).attr("data-id");
+			$("#film-id").attr("value", id);
+			var card = $(this).attr("data-card");
+			$("#film-card").attr("value", card);
+			var title = $(this).attr("data-title");
+			$("#film-title").html(title);
+			$("#message-confirmation").html("");
+			$('#choix-film-modal').modal('open');
+		});
+	}
+
+    function fillCanvas() {
+		$(".film-canvas").each(function() {
+		    var x = $(this).attr("data-x");
+		    var y = $(this).attr("data-y");
+		    var poster = $(this).attr("data-poster");
+		    var ctx = $(this).get(0).getContext("2d");
+		    var width = $(this).parent().width();
+		    var height = $(this).parent().width() * 433 / 316
+            ctx.canvas.width = width;
+            ctx.canvas.height = height;
+		    var img = new Image;
+            img.onload = function(){
+                ctx.drawImage(img, x, y, 316, 433, 0, 0, width, height);
+            };
+            img.src = poster;
+		});
+    }
+
+    function loadFilms() {
+		$.ajax({
+			url: "services/all_movies.php",
+			type: "GET",
+			success: function(result){
+				var resultat = JSON.parse(result);
+				if (resultat.code == "0") {
+					console.log(result);
+
+					var imageList = "";
+					resultat.content.forEach(function (film) {
+				        var dataDiv = "data-id='" + film.id + "' data-card='" + film.card + "' data-title='" + film.title + "'";
+				        var dataCanvas = "data-poster='" + film.poster + "' data-x='" + film.posterx + "' data-y='" + film.postery + "'";
+						imageList += "<div class='col s6 m6 l2 image-container' " + dataDiv + ">";
+						imageList += "    <canvas class='film-canvas' width='100%' height='100%' " + dataCanvas + "></canvas>";
+						imageList += "</div>";
+					});
+					
+					$("#image-liste").html(imageList);
+				} else {
+					console.log("erreur: " + resultat.message);
+				}
+			},
+			error: function(xhr, status, error) {
+				console.log("erreur !!!");
+			},
+			complete: function() {
+    			activateClickFilm();
+    			fillCanvas();
+			}
+		});    
+    }
+
+	$(document).ready(function () {
+		activateModal();
+		loadFilms();
 	});
+	
 	
 	
 	</script>

@@ -2,6 +2,7 @@
     //header('Access-Control-Allow-Origin: *'); // To be able to call this with an ajax call from another site.
     $file_map_id_title = "map_id_title.txt";
     $file_map_id_card = "map_id_card.txt";
+    $mainDir = "..";
     $posterDirectory = 'posters';
     $descriptionDirectory = 'copi4jpg';
 
@@ -9,6 +10,21 @@
     $response["code"] = 0;
     $response["message"] = "OK";
     $response["content"] = array();
+
+    $elements = scandir($mainDir . "/" . $posterDirectory);
+    $posterPositions = array();
+    foreach ($elements as $element) {
+        if ($element != "." && $element != ".." && is_dir($mainDir . "/" . $posterDirectory . "/" . $element)) {
+            $posters = scandir($mainDir . "/" . $posterDirectory . "/" . $element);
+            $index = 0;
+            foreach ($posters as $poster) {
+                if ($poster != "." && $poster != "..") {
+                    $posterPositions[$poster] = $index;
+                    $index++;
+                }
+            }
+        }
+    }
 
     $string_map_id_card = file_get_contents($file_map_id_card);
     $map_id_card = array();
@@ -30,7 +46,9 @@
             $element["title"] = str_replace("_", " ", $title);
             $element["card"] = $map_id_card[$id];
             $element["description"] = $descriptionDirectory . "/" . substr($title, 0, 1) . "/" . $title . ".jpg";
-            $element["poster"] = $posterDirectory . "/" . substr($title, 0, 1) . "/" . $title . ".jpg";
+            $element["poster"] = $posterDirectory . "/" . substr($title, 0, 1) . ".jpg";
+            $element["postery"] = 433 * ($posterPositions[$title . ".jpg"] % 5);
+            $element["posterx"] = 316 * (floor($posterPositions[$title . ".jpg"] / 5));
             array_push($response["content"], $element);
         }
     }

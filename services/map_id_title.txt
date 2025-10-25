@@ -1017,7 +1017,7 @@ taken3 taken_3 /8822730
 tambour le_tambour /439947
 tanQuilAuraHomm tant_qu_il_y_aura_des_hommes /404144
 tarzan tarzan /419929
-tarzan2016 tarzan2016 /11273139
+tarzan2016 tarzan_2016 /11273139
 tatoue le_tatoue /395562
 taxiDriver taxi_driver /467266
 ted ted /435443
@@ -1092,7 +1092,7 @@ tunique la_tunique /492958
 twiligh2Tenta twilight_chapitre_2_tentation /490133
 twiligh3Hesit twilight_chapitre_3_hesitation /380081
 twilight1 twilight_chapitre_1_fascination /470705
-twilight5Revelation twilight_chapitre_5_revelation /452370
+twilight5Revelation twilight_chapitre_5_revelation_2e_partie /452370
 twilit4Revel twilight_chapitre_4_revelation_1ere_partie /384222
 twister twister /471634
 usualsuspect usual_suspects /390881
