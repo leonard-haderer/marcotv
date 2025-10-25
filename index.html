@@ -14,19 +14,25 @@
     <div class="modal-content">
       <h4>Vous avez choisi <span id="film-title"></span></h4>
 	  <h5>Identifiez-vous</h5>
-	  <button id="Pierre">Pierre</button>
-	  <button id="Bernadette">Bernadette</button>
+	  <button class="button-container" id="button-user">Papoum</button>
+	  <button class="button-container" id="button-user">Bernadette et Jean-Claude</button>
+	  <button class="button-container" id="button-user">Christine et André</button>
+	  <button class="button-container" id="button-user">Marie</button>
+	  <button class="button-container" id="button-user">Jean</button>
+	  <button class="button-container" id="button-user">Pierre</button>
+	  <button class="button-container" id="button-user">Daria</button>
+	  <button class="button-container" id="button-user">Lore</button>
 	  <p id="message-confirmation"></p>
     </div>
     <div class="modal-footer">
 	  <input type="hidden" id="film-id"></input>
 	  <input type="hidden" id="film-card"></input>
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Fermer</a>
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="button-fermer">Fermer</a>
     </div>
   </div>
   
-		<nav class="light-blue lighten-1" role="navigation">
-			<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+		<nav class="barre-navigation" role="navigation">
+			<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo"><img class="titre" src="titre/Titre-site.png" alt="Titre du site"></a>
 				<ul class="right hide-on-med-and-down">
 					<li><a href="#">Navbar Link</a></li>
 				</ul>
@@ -90,7 +96,7 @@
 	$(document).ready(function(){
 		$('.modal').modal();
 
-		$("#Pierre").click(function() {
+		$("#button-user").click(function() {
 			var id = $("#film-id").attr("value");
 			var card = $("#film-card").attr("value");
 			console.log("Click !!! --- " + id);

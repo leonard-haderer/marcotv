@@ -6,4 +6,41 @@
 #film-title {
 	font-style: italic;
 	color: #1C48A3;
+	font-size: 35px;
+}
+
+.modal {
+	border-radius: 40px;
+    padding: 15px;
+}
+
+.barre-navigation {
+	background : linear-gradient(60deg, #1C48A3, #991818);
+}
+
+.titre {
+	width: 600px;
+    height: 400px;
+}
+
+.button-container {
+	border-radius: 10px;
+    padding: 5px;
+	font-size: 20px;
+    background-color: #8ABFAC;
+}
+
+h4 {
+	font-size: 40px;
+}
+
+h5 {
+	font-size: 30px;
+}
+
+#button-fermer {
+    background-color: #B5B0B0;
+    border-radius: 15px;
+    padding: 0%;
+	width: 80px;
 }
